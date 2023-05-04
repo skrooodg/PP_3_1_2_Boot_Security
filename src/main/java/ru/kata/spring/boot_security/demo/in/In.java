@@ -9,18 +9,17 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repositories.RoleJpaRep;
 import ru.kata.spring.boot_security.demo.repositories.UserJpaRep;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class in implements CommandLineRunner {
+public class In implements CommandLineRunner {
     private final UserJpaRep userJpaRep;
     private final RoleJpaRep roleJpaRep;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public in (UserJpaRep userJpaRep, RoleJpaRep roleJpaRep, PasswordEncoder passwordEncoder) {
+    public In (UserJpaRep userJpaRep, RoleJpaRep roleJpaRep, PasswordEncoder passwordEncoder) {
         this.userJpaRep = userJpaRep;
         this.roleJpaRep = roleJpaRep;
         this.passwordEncoder = passwordEncoder;

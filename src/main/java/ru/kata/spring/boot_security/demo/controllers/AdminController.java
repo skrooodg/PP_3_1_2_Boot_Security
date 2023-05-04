@@ -8,6 +8,7 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleServiceImp;
 import ru.kata.spring.boot_security.demo.service.UserServiceImp;
+
 import java.util.List;
 
 @Controller
@@ -15,6 +16,7 @@ import java.util.List;
 public class AdminController {
     private final UserServiceImp userServiceImp;
     private final RoleServiceImp roleServiceImp;
+
     @Autowired
     public AdminController(UserServiceImp userServiceImp, RoleServiceImp roleServiceImp) {
         this.userServiceImp = userServiceImp;
@@ -36,19 +38,20 @@ public class AdminController {
     }
 
     @GetMapping("/addUser")
-    public String addNewUser(Model model, @ModelAttribute("user") User user ) {
+    public String addNewUser(Model model, @ModelAttribute("user") User user) {
         List<Role> roles = roleServiceImp.getRoles();
         model.addAttribute("rolesAdd", roles);
         return "creation";
     }
 
     @PostMapping
-    public String addCreateNewUser(@ModelAttribute("user") User user,Model model) {
+    public String addCreateNewUser(@ModelAttribute("user") User user, Model model) {
         try {
             userServiceImp.save(user);
         } catch (Exception er) {
             System.err.println("Пользователь с таким логином уже существует!");
-        }return "redirect:/admin";
+        }
+        return "redirect:/admin";
     }
 
     @GetMapping("/{id}/editUser")
@@ -63,10 +66,11 @@ public class AdminController {
         try {
             userServiceImp.update(user);
         } catch (Exception e) {
-        System.err.println("Пользователь с таким логином уже существует!");
-    }
+            System.err.println("Пользователь с таким логином уже существует!");
+        }
         return "redirect:/admin";
     }
+
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userServiceImp.delete(id);

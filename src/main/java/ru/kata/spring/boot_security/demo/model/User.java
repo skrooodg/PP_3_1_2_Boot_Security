@@ -14,21 +14,15 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "Name")
     private String name;
-    @Column(name = "Last_name")
     private String lastName;
-    @Column(name = "Age")
     private int age;
-    @Column(name = "Nation")
     private String national;
-    @Column(name = "Username")
+    @Column(name = "email")
     private String userName;
-    @Column(name = "Password")
     private String password;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
@@ -36,6 +30,7 @@ public class User implements UserDetails {
 
     public User() {
     }
+
     public User(Long id, String name, String lastName, int age, String national, String userName, String password, Set<Role> roles) {
         this.id = id;
         this.name = name;
